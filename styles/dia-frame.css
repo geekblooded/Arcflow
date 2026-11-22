@@ -10,11 +10,11 @@
   --dia-corner-radius: 12px;
   --dia-frame-color: #ebecf7;
   --dia-border-glow: rgba(0, 0, 0, 0.08);
-  --dia-sidebar-pinned-width: 248px;
+  --dia-sidebar-pinned-width: min(var(--arcflow-sidebar-width, 248px), max(0px, 100vw - 24px));
 }
 
 html[data-dia-downloads-open="true"] {
-  --dia-sidebar-pinned-width: 285.2px;
+  --dia-sidebar-pinned-width: min(calc(var(--arcflow-sidebar-width, 248px) * 1.15), max(0px, 100vw - 24px));
 }
 
 /* Base non-invasive fixed overlay container */
@@ -189,4 +189,8 @@ html[data-dia-sidebar-pinned="true"][data-dia-bezel-active="true"][data-dia-inse
 html:fullscreen #dia-chrome-tweaks-frame-root,
 html:-webkit-full-screen #dia-chrome-tweaks-frame-root {
   display: none !important;
+}
+
+html[data-arcflow-sidebar-resizing][data-dia-sidebar-pinned="true"] body {
+  transition: none !important;
 }

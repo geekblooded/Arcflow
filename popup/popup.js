@@ -117,6 +117,31 @@ let navHistory = ['detail-bezel'];
 let navIndex = 0;
 let activeCategory = 'page';
 let currentWindowState = null;
+let arcflowActivated = false;
+let showActivationSuccess = false;
+
+function celebrateActivation() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const card = document.querySelector('.dia-welcome-card');
+  const heroHeight = card.querySelector('.dia-welcome-hero').offsetHeight;
+  const colors = ['#0878f9', '#f9b800', '#00a661', '#ef4545'];
+  for (let i = 0; i < 24; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'dia-confetti-piece';
+    piece.setAttribute('aria-hidden', 'true');
+    piece.style.backgroundColor = colors[i % colors.length];
+    piece.style.left = `${4 + ((i * 37) % 92)}%`;
+    card.appendChild(piece);
+    const drift = (i % 2 === 0 ? 1 : -1) * (8 + (i % 5) * 4);
+    const duration = 4300 + (i % 7) * 220;
+    piece.animate([
+      { transform: 'translateY(-10px) rotate(-20deg)', opacity: 0 },
+      { transform: `translate(${drift * .2}px, ${heroHeight * .14}px) rotate(10deg)`, opacity: .85, offset: .2 },
+      { transform: `translate(${drift * .6}px, ${heroHeight * .48}px) rotate(45deg)`, opacity: .85, offset: .65 },
+      { transform: `translate(${drift}px, ${heroHeight * .76}px) rotate(80deg)`, opacity: 0 }
+    ], { duration, delay: -(i / 24) * duration, iterations: Infinity });
+  }
+}
 const isEmbeddedSettings = location.pathname.endsWith('/popup/embedded.html');
 
 function closeSettingsView() {
@@ -195,11 +220,24 @@ function renderSettings(s) {
   const isEnabled = s.enabled !== false;
   if (els.welcomeView && els.settingsShell) {
     const fullscreen = currentWindowState?.state === 'fullscreen';
-    const setupComplete = isEnabled && fullscreen;
-    document.body.classList.toggle('dia-onboarding', !setupComplete);
-    els.welcomeView.hidden = setupComplete;
-    els.settingsShell.hidden = !setupComplete;
+    const setupComplete = isEnabled && fullscreen && arcflowActivated;
+    const success = setupComplete && showActivationSuccess;
+    const successView = document.getElementById('activationSuccess');
+    const newlyVisible = success && successView?.hidden;
+    if (successView) successView.hidden = !success;
+    document.body.classList.toggle('dia-onboarding', !setupComplete || success);
+    els.welcomeView.hidden = setupComplete && !success;
+    els.settingsShell.hidden = !setupComplete || success;
     document.getElementById('welcomeIntro').hidden = setupComplete;
+    if (newlyVisible) {
+      successView.querySelector('h1').focus();
+      celebrateActivation();
+    } else if (!success) {
+      els.welcomeView.querySelectorAll('.dia-confetti-piece').forEach(piece => {
+        piece.getAnimations().forEach(animation => animation.cancel());
+        piece.remove();
+      });
+    }
   }
 
 
@@ -300,24 +338,36 @@ function applyCategoryAndSearch() {
   });
 }
 
+function updateActivationAvailability() {
+  if (!els.bigPowerBtn || !els.dataUseConsent) return;
+  const fullscreen = currentWindowState?.state === 'fullscreen';
+  document.getElementById('fullscreenActivationHint').hidden = !fullscreen;
+  els.bigPowerBtn.disabled = currentWindowState?.type !== 'normal' || fullscreen ||
+    !els.dataUseConsent.checked || els.bigPowerBtn.classList.contains('is-activating');
+}
+
 async function syncWindowStateToggles() {
   try {
     const win = await chrome.windows.getCurrent();
     currentWindowState = win;
-    if (currentSettings.enabled !== false && win.state === 'fullscreen') {
-      const session = await chrome.storage.session.get('arcFullscreenWindowId');
-      if (session.arcFullscreenWindowId == null) {
-        await chrome.storage.session.set({ arcSetupWindowId: win.id, arcFullscreenWindowId: win.id });
-      }
-    }
+    const session = await chrome.storage.session.get(['arcflowActivated', 'arcflowWelcomeWindowId']);
+    arcflowActivated = session.arcflowActivated === true;
+    showActivationSuccess = session.arcflowWelcomeWindowId === win.id;
     els.framelessModeToggle.checked = win.state === 'fullscreen';
     renderSettings(currentSettings);
+    updateActivationAvailability();
   } catch {
     // Ignore
   }
 }
 
 function bindEvents() {
+  document.getElementById('continueBrowsing')?.addEventListener('click', async () => {
+    await chrome.storage.session.remove('arcflowWelcomeWindowId');
+    showActivationSuccess = false;
+    renderSettings(currentSettings);
+    closeSettingsView();
+  });
   els.railItems.forEach((item) => {
     item.addEventListener('click', () => {
       els.railItems.forEach((i) => i.classList.remove('is-active'));
@@ -399,28 +449,31 @@ function bindEvents() {
   }
 
   if (els.dataUseConsent && els.bigPowerBtn) {
-    els.dataUseConsent.addEventListener('change', () => {
-      els.bigPowerBtn.disabled = !els.dataUseConsent.checked;
+    els.dataUseConsent.addEventListener('change', updateActivationAvailability);
+    chrome.windows.onBoundsChanged.addListener(win => {
+      if (win.id === currentWindowState?.id) void syncWindowStateToggles();
     });
 
     els.bigPowerBtn.addEventListener('click', async () => {
-      if (!els.dataUseConsent.checked) return;
+      if (els.bigPowerBtn.disabled) return;
       const errorEl = document.getElementById('setupError');
       errorEl.hidden = true;
       els.bigPowerBtn.disabled = true;
       els.bigPowerBtn.classList.add('is-activating');
       try {
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) await new Promise(resolve => setTimeout(resolve, 500));
-        const res = await chrome.runtime.sendMessage({ type: 'DIA_ACTIVATE_ARC' });
+        const win = await chrome.windows.getCurrent();
+        const res = await chrome.runtime.sendMessage({ type: 'DIA_ACTIVATE_ARC', windowId: win.id });
         if (!res?.ok) throw new Error(res?.error || 'Could not enter full screen.');
         currentSettings = { ...currentSettings, enabled: true, activationMode: 'fullscreen' };
         await syncWindowStateToggles();
       } catch (err) {
+        await syncWindowStateToggles();
         errorEl.textContent = err.message || 'Could not enter full screen.';
         errorEl.hidden = false;
       } finally {
         els.bigPowerBtn.classList.remove('is-activating');
-        els.bigPowerBtn.disabled = !els.dataUseConsent.checked;
+        updateActivationAvailability();
       }
     });
   }
@@ -610,19 +663,15 @@ function bindEvents() {
   els.openPaletteNowBtn.addEventListener('click', async () => {
     try {
       const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (activeTab?.id && activeTab.url && /^https?:\/\//i.test(activeTab.url)) {
-        await chrome.tabs.sendMessage(activeTab.id, {
-          type: 'DIA_TOGGLE_COMMAND_BAR',
-          mode: 'command'
-        });
-        closeSettingsView();
-        return;
-      }
-      await chrome.tabs.create({ url: chrome.runtime.getURL('newtab/newtab.html') });
+      if (activeTab?.id == null) throw new Error('No active tab');
+      const response = await chrome.tabs.sendMessage(activeTab.id, {
+        type: 'DIA_TOGGLE_COMMAND_BAR',
+        mode: 'command'
+      });
+      if (!response?.ok) throw new Error('Command bar unavailable');
       closeSettingsView();
     } catch {
-      await chrome.tabs.create({ url: chrome.runtime.getURL('newtab/newtab.html') });
-      closeSettingsView();
+      showInlineToast('Open the command bar from a regular webpage in Arcflow.', 'info');
     }
   });
 

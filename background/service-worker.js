@@ -87,7 +87,7 @@ async function ensureTabInjected(tabId, url) {
 async function injectIntoAllOpenTabs() {
   try {
     const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
-    if (!enabled) return;
+    if (!enabled || !await isArcflowActive()) return;
     const tabs = await chrome.tabs.query({});
     for (const tab of tabs) {
       if (tab.id && isInjectableUrl(tab.url)) {
@@ -158,12 +158,17 @@ async function toggleFramelessWindow(sourceTab) {
   }
 }
 
+async function isArcflowActive() {
+  const { arcflowActivated } = await chrome.storage.session.get('arcflowActivated');
+  return arcflowActivated === true;
+}
+
 async function notifyWindowMode(tabId, windowId) {
   try {
     const win = await chrome.windows.get(windowId);
     await chrome.tabs.sendMessage(tabId, {
       type: 'DIA_WINDOW_STATE_CHANGED',
-      isFullscreen: win.state === 'fullscreen',
+      isFullscreen: win.state === 'fullscreen' && await isArcflowActive(),
       isFrameless: win.type === 'popup',
       windowState: win.state,
       windowType: win.type
@@ -541,7 +546,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 
     const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
     const activeWindow = await chrome.windows.get(activeTab.windowId);
-    if (!enabled || activeWindow.state !== 'fullscreen') return;
+    if (!enabled || activeWindow.state !== 'fullscreen' || !await isArcflowActive()) return;
 
     if (command === 'copy-current-url') {
       await sendToTabWithInjectionFallback(activeTab, {
@@ -552,14 +557,10 @@ chrome.commands.onCommand.addListener(async (command) => {
     }
 
     const mode = command === 'open-url-bar' ? 'url' : 'command';
-    const delivered = await sendToTabWithInjectionFallback(activeTab, {
+    await sendToTabWithInjectionFallback(activeTab, {
       type: 'DIA_TOGGLE_COMMAND_BAR',
       mode
     });
-
-    if (!delivered) {
-      await chrome.tabs.create({ url: 'chrome://newtab' });
-    }
   } catch (err) {
     console.error('[Arcflow] Command error:', err);
   }
@@ -574,7 +575,7 @@ chrome.windows.onBoundsChanged.addListener(async (win) => {
       await chrome.storage.session.set({ arcFullscreenWindowId: win.id });
     }
     if (!isFullscreen && session.arcFullscreenWindowId === win.id) {
-      await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId']);
+      await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId', 'arcflowActivated', 'arcflowWelcomeWindowId']);
       await chrome.storage.sync.set({ enabled: false });
       await chrome.storage.local.set({ enabled: false });
     }
@@ -585,7 +586,7 @@ chrome.windows.onBoundsChanged.addListener(async (win) => {
         try {
           await chrome.tabs.sendMessage(tab.id, {
             type: 'DIA_WINDOW_STATE_CHANGED',
-            isFullscreen,
+            isFullscreen: isFullscreen && await isArcflowActive(),
             isFrameless,
             windowState: win.state,
             windowType: win.type
@@ -604,7 +605,7 @@ chrome.windows.onBoundsChanged.addListener(async (win) => {
 async function broadcastTabsUpdated() {
   try {
     const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
-    if (!enabled) return;
+    if (!enabled || !await isArcflowActive()) return;
     const enriched = await getEnrichedOpenTabs();
     const activeTabs = await chrome.tabs.query({ active: true });
     for (const tab of activeTabs) {
@@ -647,6 +648,7 @@ chrome.tabGroups?.onRemoved?.addListener(async (group) => {
 });
 chrome.tabGroups?.onUpdated?.addListener(() => { broadcastTabsUpdated(); });
 chrome.tabs.onActivated.addListener((activeInfo) => {
+  void notifyWindowMode(activeInfo.tabId, activeInfo.windowId);
   recordRecentTab(activeInfo).finally(() => broadcastTabsUpdated());
 });
 chrome.tabs.onMoved.addListener(() => { broadcastTabsUpdated(); });
@@ -677,7 +679,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
         ]);
         if (!settings.enabled || !frame?.errorOccurred || frame.url !== details.url) return;
         const win = await chrome.windows.get(tab.windowId);
-        if (win.state !== 'fullscreen') return;
+        if (win.state !== 'fullscreen' || !await isArcflowActive()) return;
         const key = `arcRecovery:${details.tabId}`;
         await chrome.storage.session.set({ [key]: { url: details.url, error: details.error } });
         // Recheck after asynchronous work so a newer navigation is never replaced.
@@ -691,7 +693,7 @@ chrome.webNavigation.onErrorOccurred.addListener((details) => {
   }).catch(() => {});
 });
 
-// Message router for content scripts, New Tab override, and popup UI
+// Message router for content scripts, navigation recovery, and popup UI
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (!message || !message.type) return false;
 
@@ -722,22 +724,38 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'DIA_ACTIVATE_ARC') {
     (async () => {
       try {
-        const win = await chrome.windows.getLastFocused();
+        const win = Number.isInteger(message.windowId)
+          ? await chrome.windows.get(message.windowId)
+          : await chrome.windows.getLastFocused();
+        if (win.state === 'fullscreen') {
+          sendResponse({ ok: false, error: 'Exit full screen to activate Arcflow.' });
+          return;
+        }
         if (win.type !== 'normal') throw new Error('Open a normal Chrome window to enter full screen.');
         await chrome.storage.sync.set({ enabled: true, activationMode: 'fullscreen' });
         await chrome.storage.session.set({ arcSetupWindowId: win.id });
-        if (win.state !== 'fullscreen') await chrome.windows.update(win.id, { state: 'fullscreen' });
-        await chrome.storage.session.set({ arcFullscreenWindowId: win.id });
-        const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (activeTab) {
-          if (isInjectableUrl(activeTab.url)) {
-            await ensureTabInjected(activeTab.id, activeTab.url);
-          }
+        await chrome.windows.update(win.id, { state: 'fullscreen' });
+        const [activeTab] = await chrome.tabs.query({ active: true, windowId: win.id });
+        const googleUrl = 'https://www.google.com/';
+        const activeUrl = activeTab?.pendingUrl || activeTab?.url;
+        if (!activeTab) {
+          await chrome.tabs.create({ windowId: win.id, url: googleUrl });
+        } else if (['chrome://newtab/', 'chrome://new-tab-page/', 'about:blank', chrome.runtime.getURL('newtab/newtab.html')].includes(activeUrl)) {
+          await chrome.tabs.update(activeTab.id, { url: googleUrl });
+        } else if (isInjectableUrl(activeUrl)) {
+          await ensureTabInjected(activeTab.id, activeUrl);
         }
+        await chrome.storage.session.set({
+          arcFullscreenWindowId: win.id,
+          arcflowActivated: true,
+          arcflowWelcomeWindowId: win.id
+        });
+        const tabs = await chrome.tabs.query({ active: true });
+        await Promise.all(tabs.filter(tab => tab.id != null).map(tab => notifyWindowMode(tab.id, tab.windowId)));
         await broadcastTabsUpdated();
         sendResponse({ ok: true });
       } catch (err) {
-        await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId']);
+        await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId', 'arcflowActivated', 'arcflowWelcomeWindowId']);
         await chrome.storage.sync.set({ enabled: false });
         sendResponse({ ok: false, error: String(err) });
       }
@@ -749,7 +767,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     (async () => {
       try {
         const session = await chrome.storage.session.get('arcFullscreenWindowId');
-        await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId']);
+        await chrome.storage.session.remove(['arcFullscreenWindowId', 'arcSetupWindowId', 'arcflowActivated', 'arcflowWelcomeWindowId']);
         await chrome.storage.sync.set({ enabled: false });
         if (session.arcFullscreenWindowId != null) {
           const win = await chrome.windows.get(session.arcFullscreenWindowId).catch(() => null);
@@ -771,7 +789,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           ? await chrome.windows.get(windowId)
           : await chrome.windows.getCurrent();
         sendResponse({
-          isFullscreen: win.state === 'fullscreen',
+          isFullscreen: win.state === 'fullscreen' && await isArcflowActive(),
           isFrameless: win.type === 'popup',
           windowState: win.state,
           windowType: win.type,
@@ -788,7 +806,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     (async () => {
       try {
         const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
-        if (!enabled) { sendResponse({ tabs: [] }); return; }
+        if (!enabled || !await isArcflowActive()) { sendResponse({ tabs: [] }); return; }
         const tabs = await getEnrichedOpenTabs();
         sendResponse({ tabs, activeTabId: sender.tab?.id ?? null });
       } catch (err) {
@@ -1049,7 +1067,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     (async () => {
       try {
         const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
-        if (!enabled) { sendResponse({ ok: false, items: [] }); return; }
+        if (!enabled || !await isArcflowActive()) { sendResponse({ ok: false, items: [] }); return; }
         const query = String(message.query || '').trim().slice(0, 200);
         const items = await chrome.downloads.search({ limit: 200, orderBy: ['-startTime'], ...(query ? { query: query.split(/\s+/) } : {}) });
         sendResponse({ ok: true, items: items.map(({ id, filename, state, danger, exists, startTime, bytesReceived, totalBytes, paused, error }) => ({ id, filename, state, danger, exists, startTime, bytesReceived, totalBytes, paused, error })) });
@@ -1122,7 +1140,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     (async () => {
       try {
         const { enabled = false } = await chrome.storage.sync.get({ enabled: false });
-        if (!enabled) { sendResponse({ ok: true, extensions: [] }); return; }
+        if (!enabled || !await isArcflowActive()) { sendResponse({ ok: true, extensions: [] }); return; }
         const extensions = await getInstalledExtensionsList();
         sendResponse({ ok: true, extensions });
       } catch (err) {

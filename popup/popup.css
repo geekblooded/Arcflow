@@ -100,7 +100,7 @@ body {
 .dia-rail-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   padding: 2px 8px 14px;
 }
 
@@ -122,7 +122,7 @@ body {
 
 .dia-brand-name {
   font-size: 13.5px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text-main);
 }
@@ -1083,6 +1083,7 @@ body, .dia-settings-shell, .dia-welcome-shell { border-radius: 24px; overflow: h
 .dia-exit-label { max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap; font-size: 11px; font-weight: 600; transition: opacity 160ms ease, max-width 220ms ease; }
 .dia-power-header-btn:hover .dia-exit-label, .dia-power-header-btn:focus-visible .dia-exit-label { max-width: 60px; opacity: 1; }
 
+
 /* Fill Chrome's popup without an extra padded surface. */
 body { padding: 0; overflow: hidden; background: transparent; }
 .dia-settings-shell, .dia-welcome-shell { width: 100%; height: 100%; border-radius: 24px; overflow: hidden; }
@@ -1101,4 +1102,54 @@ body.dia-onboarding .dia-welcome-shell { height: auto; max-height: 600px; }
 body.dia-onboarding .dia-welcome-card { height: auto; }
 body.dia-onboarding .dia-welcome-content { flex: none; padding-bottom: 24px; gap: 24px; }
 .dia-welcome-intro { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+#activationDataUse a { color: #075bbb; }
+body.dia-onboarding .dia-welcome-shell { overflow-y: auto; }
 body.dia-onboarding .dia-big-power-btn { margin-top: 0; }
+
+.dia-welcome-card { position: relative; }
+.dia-confetti-piece {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 9px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+#continueBrowsing {
+  position: relative;
+  min-height: 44px;
+  padding: 0 52px 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #18181b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#continueBrowsing span {
+  display: inline-block;
+  transition: transform 300ms ease;
+}
+#continueBrowsing svg {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 4px;
+  width: 36px;
+  height: 36px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #fff;
+  color: #18181b;
+  transition: inset-inline-end 300ms ease, transform 300ms ease;
+}
+#continueBrowsing:is(:hover, :focus-visible) span { transform: translateX(32px); }
+#continueBrowsing:is(:hover, :focus-visible) svg {
+  inset-inline-end: calc(100% - 40px);
+  transform: rotate(45deg);
+}
+#continueBrowsing:focus-visible { outline: 2px solid #0878f9; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  #continueBrowsing span, #continueBrowsing svg { transition: none; }
+}

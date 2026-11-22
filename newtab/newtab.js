@@ -9,13 +9,18 @@ function normalizeNewTabDestination(value) {
 document.addEventListener('DOMContentLoaded', async () => {
   const input = document.getElementById('ntAddressInput');
   const form = document.getElementById('ntAddressForm');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const url = normalizeNewTabDestination(input?.value);
+    if (!url) return;
+    await chrome.runtime.sendMessage({ type: 'DIA_NAVIGATE', url, newTab: false });
+  });
+
   if (new URLSearchParams(location.search).has('recovery')) {
     const tab = await chrome.tabs.getCurrent();
     const key = `arcRecovery:${tab?.id}`;
     const stored = await chrome.storage.session.get(key);
     const failure = stored[key];
-    document.getElementById('recoveryMessage').hidden = false;
-    document.querySelector('.hint').hidden = true;
     if (failure?.url) {
       input.value = failure.url;
       const retry = document.getElementById('recoveryRetry');
@@ -26,24 +31,5 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
     input.focus();
-    return;
   }
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const url = normalizeNewTabDestination(input?.value);
-    if (!url) return;
-    await chrome.runtime.sendMessage({ type: 'DIA_NAVIGATE', url, newTab: false });
-  });
-
-  chrome.storage.sync.get({ openNewTabInCommandBar: true }).then(({ openNewTabInCommandBar }) => {
-    if (openNewTabInCommandBar !== false) {
-      setTimeout(() => {
-        window.dispatchEvent(new KeyboardEvent('keydown', {
-          key: 'k', metaKey: true, bubbles: true, cancelable: true
-        }));
-      }, 90);
-    } else {
-      input?.focus();
-    }
-  }).catch(() => input?.focus());
 });

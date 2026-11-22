@@ -56,6 +56,13 @@
     lock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10.5" rx="3.5" fill="currentColor" fill-opacity="0.14"></rect><rect x="4.5" y="10" width="15" height="10.5" rx="3.5"></rect><path d="M8 10V7.5C8 5.29086 9.79086 3.5 12 3.5C14.2091 3.5 16 5.29086 16 7.5V10"></path></svg>`,
     globe: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="currentColor" fill-opacity="0.10"></circle><circle cx="12" cy="12" r="9"></circle><path d="M3.6 9H20.4M3.6 15H20.4"></path><path d="M12 3C14.4 5.5 15.6 8.7 15.6 12C15.6 15.3 14.4 18.5 12 21C9.6 18.5 8.4 15.3 8.4 12C8.4 8.7 9.6 5.5 12 3Z"></path></svg>`,
     copy: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><path d="M0 0h16v16H0z" fill="none"/><g fill="currentColor"><path d="M6.939 5.01c.57.044 1.122.216 1.619.503c.496.286.924.678 1.257 1.148l-1.63 1.157a2 2 0 0 0-.625-.573a1.8 1.8 0 0 0-1.564-.12c-.255.101-.49.26-.69.469l-1.75 1.848c-.355.391-.56.924-.555 1.486c.005.564.22 1.094.584 1.478c.362.383.841.59 1.33.594a1.85 1.85 0 0 0 1.333-.562l.308-.325a1 1 0 0 1 1.452 1.375l-.315.332l-.012.013A3.85 3.85 0 0 1 4.896 15a3.86 3.86 0 0 1-2.763-1.218A4.18 4.18 0 0 1 1 10.943a4.18 4.18 0 0 1 1.085-2.857l.012-.013l1.758-1.855a3.9 3.9 0 0 1 1.408-.953a3.8 3.8 0 0 1 1.676-.254"/><path d="M11.105 1a3.86 3.86 0 0 1 2.762 1.218A4.18 4.18 0 0 1 15 5.057a4.18 4.18 0 0 1-1.085 2.858l-.012.013l-1.758 1.854a3.9 3.9 0 0 1-1.408.953a3.8 3.8 0 0 1-3.295-.247a4 4 0 0 1-1.257-1.15l1.63-1.156c.17.24.386.434.626.573a1.79 1.79 0 0 0 1.563.12c.255-.1.49-.26.69-.469l1.751-1.847c.355-.391.56-.924.555-1.486a2.18 2.18 0 0 0-.584-1.48A1.86 1.86 0 0 0 11.086 3a1.85 1.85 0 0 0-1.334.564l-.313.328a1 1 0 0 1-1.447-1.38l.319-.334l.01-.01A3.85 3.85 0 0 1 11.104 1"/></g></svg>`,
+    folderStack: `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <path fill="currentColor" fill-rule="evenodd" d="M16.7 15.77h.75c1.76 0 2.64 0 3.3-.36a3 3 0 0 0 1.23-1.22c.35-.66.35-1.54.35-3.3s0-2.64-.35-3.3a3 3 0 0 0-1.23-1.23c-.66-.35-1.54-.35-3.3-.35h-.52c-.7 0-1.06 0-1.4-.08a3 3 0 0 1-.7-.26c-.3-.16-.57-.39-1.1-.85c-.55-.45-.82-.68-1.12-.84a3 3 0 0 0-.7-.26c-.33-.08-.69-.08-1.4-.08h-.59A2.73 2.73 0 0 0 7.2 6.38V8.8l2.73 1.87h4.7l2.08 1.51z" clip-rule="evenodd" opacity=".2"/>
+  <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <path d="M3.56 8.32h1.62c.46 0 .7 0 .91.04a3 3 0 0 1 1.25.49c.19.12.36.28.7.6c.33.3.5.47.68.6a3 3 0 0 0 1.25.48c.22.04.46.04.92.04h1.03c1.77 0 2.65 0 3.32.36a3 3 0 0 1 1.21 1.2c.36.68.36 1.56.36 3.33s0 2.66-.36 3.32A3 3 0 0 1 15.24 20c-.67.37-1.55.37-3.32.37H7.67c-2.83 0-4.25 0-5.12-.88s-.88-2.3-.88-5.12v-4.14c0-1.05.84-1.9 1.89-1.9"/>
+    <path d="M16.87 15.77h.57c1.77 0 2.65 0 3.32-.36a3 3 0 0 0 1.21-1.21c.36-.67.36-1.55.36-3.32s0-2.66-.36-3.33a3 3 0 0 0-1.2-1.2c-.68-.37-1.56-.37-3.33-.37H16.4c-.46 0-.7 0-.92-.03a3 3 0 0 1-1.24-.5a6 6 0 0 1-.7-.59a6 6 0 0 0-.69-.6a3 3 0 0 0-1.25-.49c-.22-.03-.45-.03-.9-.03H9.07a1.9 1.9 0 0 0-1.9 1.9v3.05"/>
+  </g>
+</svg>`,
     folderAi: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 20L6 20C4.3431 20 3 18.6569 3 17L3 7C3 5.3431 4.3431 4 6 4L8.6716 4C9.202 4 9.7107 4.2107 10.0858 4.5858L11.4142 5.9142C11.7893 6.2893 12.298 6.5 12.8284 6.5L18 6.5C19.6569 6.5 21 7.8431 21 9.5L21 11"/><path fill="currentColor" d="M18.5492 13.3739L19.1373 14.8648C19.3173 15.3213 19.6787 15.6827 20.1352 15.8627L21.6261 16.4508C21.8518 16.5397 22 16.7576 22 17C22 17.2424 21.8518 17.4603 21.6261 17.5492L20.1352 18.1373C19.6787 18.3173 19.3173 18.6787 19.1373 19.1352L18.5492 20.6261C18.4603 20.8518 18.2424 21 18 21C17.7576 21 17.5397 20.8518 17.4508 20.6261L16.8627 19.1352C16.6827 18.6787 16.3213 18.3173 15.8648 18.1373L14.3739 17.5492C14.1482 17.4603 14 17.2424 14 17C14 16.7576 14.1482 16.5397 14.3739 16.4508L15.8648 15.8627C16.3213 15.6827 16.6827 15.3213 16.8627 14.8648L17.4508 13.3739C17.5397 13.1482 17.7576 13 18 13C18.2424 13 18.4603 13.1482 18.5492 13.3739Z" stroke="none"/><path fill="currentColor" fill-opacity=".4" d="M12.8433 10.2337L13.2108 11.1655C13.3233 11.4508 13.5492 11.6767 13.8345 11.7892L14.7663 12.1567C14.9074 12.2123 15 12.3485 15 12.5C15 12.6515 14.9074 12.7877 14.7663 12.8433L13.8345 13.2108C13.5492 13.3233 13.3233 13.5492 13.2108 13.8345L12.8433 14.7663C12.7877 14.9074 12.6515 15 12.5 15C12.3485 15 12.2123 14.9074 12.1567 14.7663L11.7892 13.8345C11.6767 13.5492 11.4508 13.3233 11.1655 13.2108L10.2337 12.8433C10.0926 12.7877 10 12.6515 10 12.5C10 12.3485 10.0926 12.2123 10.2337 12.1567L11.1655 11.7892C11.4508 11.6767 11.6767 11.4508 11.7892 11.1655L12.1567 10.2337C12.2123 10.0926 12.3485 10 12.5 10C12.6515 10 12.7877 10.0926 12.8433 10.2337Z" stroke="none"/></g></svg>`,
     sparkles: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 20L6 20C4.3431 20 3 18.6569 3 17L3 7C3 5.3431 4.3431 4 6 4L8.6716 4C9.202 4 9.7107 4.2107 10.0858 4.5858L11.4142 5.9142C11.7893 6.2893 12.298 6.5 12.8284 6.5L18 6.5C19.6569 6.5 21 7.8431 21 9.5L21 11"/><path fill="currentColor" d="M18.5492 13.3739L19.1373 14.8648C19.3173 15.3213 19.6787 15.6827 20.1352 15.8627L21.6261 16.4508C21.8518 16.5397 22 16.7576 22 17C22 17.2424 21.8518 17.4603 21.6261 17.5492L20.1352 18.1373C19.6787 18.3173 19.3173 18.6787 19.1373 19.1352L18.5492 20.6261C18.4603 20.8518 18.2424 21 18 21C17.7576 21 17.5397 20.8518 17.4508 20.6261L16.8627 19.1352C16.6827 18.6787 16.3213 18.3173 15.8648 18.1373L14.3739 17.5492C14.1482 17.4603 14 17.2424 14 17C14 16.7576 14.1482 16.5397 14.3739 16.4508L15.8648 15.8627C16.3213 15.6827 16.6827 15.3213 16.8627 14.8648L17.4508 13.3739C17.5397 13.1482 17.7576 13 18 13C18.2424 13 18.4603 13.1482 18.5492 13.3739Z" stroke="none"/><path fill="currentColor" fill-opacity=".4" d="M12.8433 10.2337L13.2108 11.1655C13.3233 11.4508 13.5492 11.6767 13.8345 11.7892L14.7663 12.1567C14.9074 12.2123 15 12.3485 15 12.5C15 12.6515 14.9074 12.7877 14.7663 12.8433L13.8345 13.2108C13.5492 13.3233 13.3233 13.5492 13.2108 13.8345L12.8433 14.7663C12.7877 14.9074 12.6515 15 12.5 15C12.3485 15 12.2123 14.9074 12.1567 14.7663L11.7892 13.8345C11.6767 13.5492 11.4508 13.3233 11.1655 13.2108L10.2337 12.8433C10.0926 12.7877 10 12.6515 10 12.5C10 12.3485 10.0926 12.2123 10.2337 12.1567L11.1655 11.7892C11.4508 11.6767 11.6767 11.4508 11.7892 11.1655L12.1567 10.2337C12.2123 10.0926 12.3485 10 12.5 10C12.6515 10 12.7877 10.0926 12.8433 10.2337Z" stroke="none"/></g></svg>`,
     folder: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5C3 5.84315 4.34315 4.5 6 4.5H9.3C10.1 4.5 10.85 4.88 11.3 5.52L12.4 7.05C12.85 7.68 13.6 8.05 14.4 8.05H18C19.6569 8.05 21 9.39315 21 11.05V16.5C21 18.1569 19.6569 19.5 18 19.5H6C4.34315 19.5 3 18.1569 3 16.5V7.5Z" fill="currentColor" fill-opacity="0.15"></path></svg>`,
@@ -155,6 +162,15 @@
 
   let leftHoverSensorEl = null;
   let sidebarEl = null;
+  let sidebarWidth = 248;
+  let sidebarResizeHandle = null;
+  let cleanupSidebarResize = () => {};
+
+  function setSidebarWidth(value) {
+    sidebarWidth = Math.max(180, Math.min(480, Number(value) || 248));
+    document.documentElement.style.setProperty('--arcflow-sidebar-width', `${sidebarWidth}px`);
+    sidebarResizeHandle?.setAttribute('aria-valuenow', String(sidebarWidth));
+  }
   let sidebarPinnedGridEl = null;
   let sidebarFoldersListEl = null;
   let sidebarTabsListEl = null;
@@ -675,7 +691,7 @@
         top: 8px;
         bottom: 8px;
         left: 8px;
-        width: 248px;
+        width: var(--dia-sidebar-pinned-width, var(--arcflow-sidebar-width, 248px));
         background: var(--surface-bg);
         backdrop-filter: blur(28px) saturate(190%);
         -webkit-backdrop-filter: blur(28px) saturate(190%);
@@ -687,7 +703,7 @@
         flex-direction: column;
         min-height: 0;
         color: var(--text-primary);
-        transform: translateX(-266px);
+        transform: translateX(calc(-100% - 18px));
         opacity: 0;
         pointer-events: none;
         transition:
@@ -702,15 +718,11 @@
         pointer-events: auto;
       }
 
-      .dia-sidebar.is-downloads { width: 285.2px; transform: translateX(-303px); }
-      .dia-sidebar.is-downloads.is-visible { transform: translateX(0); }
-      .dia-sidebar.is-downloads.is-pinned { width: 285.2px; }
-
       .dia-sidebar.is-pinned {
         top: 0;
         bottom: 0;
         left: 0;
-        width: 248px;
+        width: var(--dia-sidebar-pinned-width, var(--arcflow-sidebar-width, 248px));
         border-radius: 0;
         border: none;
         background: var(--surface-solid, var(--surface-bg));
@@ -767,7 +779,7 @@
 
       .dia-sb-url-bar {
         margin: 4px 10px 8px;
-        padding: 7.5px 10px;
+        padding: 6px 10px;
         border-radius: 10px;
         background: var(--item-bg);
         border: 1px solid var(--item-border);
@@ -867,9 +879,10 @@
         color: var(--accent);
       }
 
-      .dia-sb-url-bar .dia-copy-label,
-      .dia-top-url-pill .dia-copy-label {
-        display: none;
+      .dia-sb-url-bar .dia-sb-copy-btn {
+        width: auto;
+        min-width: 26px;
+        flex: 0 0 auto;
       }
 
       .dia-top-url-pill .dia-copy-label {
@@ -877,6 +890,7 @@
       }
 
       .dia-sb-copy-btn:hover .dia-copy-label,
+      .dia-sb-url-bar .dia-sb-copy-btn:focus-visible .dia-copy-label,
       .dia-sb-copy-btn.is-copied .dia-copy-label {
         max-width: 64px;
         opacity: 1;
@@ -1168,8 +1182,8 @@
       }
 
       .dia-sb-folder-icon {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -1177,8 +1191,8 @@
       }
 
       .dia-sb-folder-icon svg {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
       }
 
       .dia-sb-folder-count {
@@ -1187,16 +1201,22 @@
         font-weight: 500;
         color: var(--text-muted);
       }
-      .dia-sb-folder-rename {
-        border: 0; background: transparent; color: inherit; cursor: pointer;
-        display: none; align-items: center; justify-content: center;
-        width: 22px; height: 22px; padding: 3px; border-radius: 5px;
+      .dia-sb-folder-name {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
-      .dia-sb-group-header:hover .dia-sb-folder-rename,
-      .dia-sb-group-header:focus-within .dia-sb-folder-rename { display: inline-flex; }
-      .dia-sb-folder-rename[hidden] { display: none !important; }
-      .dia-sb-folder-rename:hover { background: var(--item-hover); }
-      .dia-sb-folder-rename svg { width: 16px; height: 16px; }
+      .dia-sb-folder-count { flex-shrink: 0; }
+      .dia-sb-resize-handle {
+        position: absolute;
+        inset: 0 0 0 auto;
+        width: 10px;
+        z-index: 2;
+        cursor: col-resize;
+        touch-action: none;
+      }
       .dia-sb-folder-input {
         min-width: 0; width: 100%; padding: 2px 4px; border: 1px solid var(--accent);
         border-radius: 4px; outline: none; font: inherit; color: var(--text-primary); background: transparent;
@@ -1209,8 +1229,29 @@
         padding: 2px 0 4px 12px;
       }
 
-      .dia-sb-folder.is-collapsed .dia-sb-folder-items {
-        display: none;
+      .dia-sb-folder-reveal {
+        display: grid;
+        grid-template-rows: 1fr;
+        transition: grid-template-rows 200ms cubic-bezier(.25,.8,.4,1);
+      }
+      .dia-sb-folder.is-collapsed > .dia-sb-folder-reveal {
+        grid-template-rows: 0fr;
+      }
+      .dia-sb-folder-clip {
+        min-height: 0;
+        overflow: clip;
+      }
+      .dia-sb-folder-chevron {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+        transition: transform 180ms ease-out;
+      }
+      .dia-sb-folder.is-collapsed > .dia-sb-group-header .dia-sb-folder-chevron {
+        transform: rotate(180deg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dia-sb-folder-reveal, .dia-sb-folder-chevron { transition: none; }
       }
 
       .dia-sb-tab {
@@ -1655,6 +1696,7 @@
     const sbCopyBtn = document.createElement('button');
     sbCopyBtn.className = 'dia-sb-copy-btn';
     sbCopyBtn.title = 'Copy Current URL (⌘⇧C)';
+    sbCopyBtn.setAttribute('aria-label', 'Copy current URL');
     sbCopyBtn.innerHTML = `${ICONLY.copy}<span class="dia-copy-label">Copy</span>`;
     sbCopyBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1990,6 +2032,63 @@
     sidebarEl.appendChild(downloadHost);
     sidebarEl.appendChild(sbFooter);
 
+    sidebarResizeHandle = document.createElement('div');
+    sidebarResizeHandle.className = 'dia-sb-resize-handle';
+    sidebarResizeHandle.tabIndex = 0;
+    sidebarResizeHandle.setAttribute('role', 'separator');
+    sidebarResizeHandle.setAttribute('aria-label', 'Resize sidebar');
+    sidebarResizeHandle.setAttribute('aria-orientation', 'vertical');
+    sidebarResizeHandle.setAttribute('aria-valuemin', '180');
+    sidebarResizeHandle.setAttribute('aria-valuemax', '480');
+    setSidebarWidth(sidebarWidth);
+    sidebarEl.appendChild(sidebarResizeHandle);
+
+    const saveSidebarWidth = () => chrome.storage.sync.set({ sidebarWidth }).catch(() => {});
+    let resizeStart = null;
+    sidebarResizeHandle.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || resizeStart) return;
+      event.preventDefault();
+      clearTimeout(sidebarHideTimer);
+      resizeStart = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        width: sidebarWidth,
+        scale: sidebarEl.classList.contains('is-downloads') ? 1.15 : 1
+      };
+      sidebarResizeHandle.setPointerCapture(event.pointerId);
+      sidebarResizeHandle.classList.add('is-dragging');
+      document.documentElement.setAttribute('data-arcflow-sidebar-resizing', '');
+    });
+    const moveSidebarEdge = event => {
+      if (event.pointerId !== resizeStart?.pointerId) return;
+      const delta = (event.clientX - resizeStart.x) / resizeStart.scale;
+      setSidebarWidth(Math.round(resizeStart.width + delta));
+    };
+    const finishSidebarResize = event => {
+      if (event.pointerId !== resizeStart?.pointerId) return;
+      if (event.type === 'pointerup') moveSidebarEdge(event);
+      resizeStart = null;
+      sidebarResizeHandle.classList.remove('is-dragging');
+      document.documentElement.removeAttribute('data-arcflow-sidebar-resizing');
+      void saveSidebarWidth();
+    };
+    window.addEventListener('pointermove', moveSidebarEdge, true);
+    window.addEventListener('pointerup', finishSidebarResize, true);
+    window.addEventListener('pointercancel', finishSidebarResize, true);
+    sidebarResizeHandle.addEventListener('lostpointercapture', finishSidebarResize);
+    cleanupSidebarResize = () => {
+      window.removeEventListener('pointermove', moveSidebarEdge, true);
+      window.removeEventListener('pointerup', finishSidebarResize, true);
+      window.removeEventListener('pointercancel', finishSidebarResize, true);
+    };
+    sidebarResizeHandle.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      event.stopPropagation();
+      setSidebarWidth(sidebarWidth + (event.key === 'ArrowRight' ? 10 : -10));
+      void saveSidebarWidth();
+    });
+
     sidebarEl.addEventListener('mouseenter', () => {
       if (sidebarHideTimer) clearTimeout(sidebarHideTimer);
       isSidebarHoverOpen = true;
@@ -1999,6 +2098,7 @@
     sidebarEl.addEventListener('mouseleave', () => {
       if (sidebarHideTimer) clearTimeout(sidebarHideTimer);
       sidebarHideTimer = setTimeout(() => {
+        if (sidebarResizeHandle?.classList.contains('is-dragging')) return;
         if (settingsPanelOpen) return;
         isSidebarHoverOpen = false;
         updateSidebarVisibility();
@@ -2666,9 +2766,10 @@
       const folderIcon = document.createElement('span');
       folderIcon.className = 'dia-sb-folder-icon';
       folderIcon.style.color = GROUP_COLOR_HEX[bucket.color] || 'var(--accent)';
-      folderIcon.innerHTML = ICONLY.folderAi;
+      folderIcon.innerHTML = ICONLY.folderStack;
 
       const label = document.createElement('span');
+      label.className = 'dia-sb-folder-name';
       label.textContent = folderTitle;
 
       const countSpan = document.createElement('span');
@@ -2679,17 +2780,18 @@
       groupHdr.appendChild(label);
       groupHdr.appendChild(countSpan);
 
+      const chevron = document.createElement('span');
+      chevron.className = 'dia-sb-folder-chevron';
+      chevron.setAttribute('aria-hidden', 'true');
+      chevron.innerHTML = '<svg viewBox="0 0 12 12" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7.5 3-3 3 3"/></svg>';
+      groupHdr.appendChild(chevron);
+
+      let labelToggleTimer;
       if (bucket.groupId >= 0) {
-        const renameBtn = document.createElement('button');
-        renameBtn.className = 'dia-sb-folder-rename';
-        renameBtn.type = 'button';
-        renameBtn.title = 'Rename folder';
-        renameBtn.setAttribute('aria-label', `Rename ${folderTitle}`);
-        renameBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg>';
-        groupHdr.appendChild(renameBtn);
         const beginRename = (event) => {
           event.preventDefault();
           event.stopPropagation();
+          clearTimeout(labelToggleTimer);
           if (editingFolderGroupId !== null) return;
           editingFolderGroupId = bucket.groupId;
           groupHdr.draggable = false;
@@ -2700,7 +2802,6 @@
           input.value = folderTitle;
           input.setAttribute('aria-label', 'Folder name');
           label.replaceWith(input);
-          renameBtn.hidden = true;
           input.focus();
           input.select();
           let finished = false;
@@ -2718,7 +2819,6 @@
               showToast('Could not rename folder.', 'error');
             } finally {
               input.replaceWith(label);
-              renameBtn.hidden = false;
               groupHdr.draggable = true;
               editingFolderGroupId = null;
               await refreshSidebarTabs();
@@ -2732,13 +2832,16 @@
           });
           input.addEventListener('blur', () => finish(true), { once: true });
         };
-        renameBtn.addEventListener('click', beginRename);
-        renameBtn.addEventListener('keydown', (event) => event.stopPropagation());
-        label.title = 'Double-click to rename folder';
+        label.title = `${folderTitle} · Double-click to rename`;
+        groupHdr.addEventListener('keydown', event => {
+          if (event.key === 'F2') beginRename(event);
+        });
         label.addEventListener('dblclick', beginRename);
       }
 
-      groupHdr.addEventListener('click', () => {
+      let folderBounce;
+      const toggleFolder = () => {
+        if (!groupHdr.isConnected || editingFolderGroupId === bucket.groupId) return;
         if (collapsedFolders.has(folderKey)) {
           collapsedFolders.delete(folderKey);
           folderWrap.classList.remove('is-collapsed');
@@ -2748,6 +2851,26 @@
           folderWrap.classList.add('is-collapsed');
           groupHdr.setAttribute('aria-expanded', 'false');
         }
+        const collapsed = collapsedFolders.has(folderKey);
+        if (collapsed && itemsContainer.contains(shadow.activeElement)) groupHdr.focus();
+        itemsContainer.inert = collapsed;
+        folderBounce?.cancel();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          folderBounce = itemsContainer.animate([
+            { transform: 'translateY(0)' },
+            { transform: `translateY(${collapsed ? 2 : 3}px)`, offset: 0.35 },
+            { transform: 'translateY(-1px)', offset: 0.7 },
+            { transform: 'translateY(0)' }
+          ], { duration: 200, easing: 'ease-out' });
+        }
+      };
+      groupHdr.addEventListener('click', event => {
+        if (event.target === label && bucket.groupId >= 0) {
+          clearTimeout(labelToggleTimer);
+          if (event.detail === 1) labelToggleTimer = setTimeout(toggleFolder, 250);
+          return;
+        }
+        toggleFolder();
       });
       groupHdr.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -2784,13 +2907,20 @@
 
       const itemsContainer = document.createElement('div');
       itemsContainer.className = 'dia-sb-folder-items';
+      itemsContainer.inert = isCollapsed;
       for (const tab of bucket.tabs) {
         itemsContainer.appendChild(createTabRowElement(tab));
       }
       for (const child of bucket.children) renderFolder(child, itemsContainer);
 
       folderWrap.appendChild(groupHdr);
-      folderWrap.appendChild(itemsContainer);
+      const reveal = document.createElement('div');
+      reveal.className = 'dia-sb-folder-reveal';
+      const clip = document.createElement('div');
+      clip.className = 'dia-sb-folder-clip';
+      clip.appendChild(itemsContainer);
+      reveal.appendChild(clip);
+      folderWrap.appendChild(reveal);
       target.appendChild(folderWrap);
     }
 
@@ -3126,7 +3256,7 @@
       } else if (chosen.kind === 'action-fullscreen') {
         await chrome.runtime.sendMessage({ type: 'DIA_TOGGLE_FULLSCREEN' });
       } else if (chosen.kind === 'url' || chosen.kind === 'search') {
-        const isNewTabDocument = /\/newtab\/(newtab|recovery)\.html$/.test(location.pathname);
+        const isNewTabDocument = location.href.startsWith(chrome.runtime.getURL('newtab/recovery.html'));
         const shouldOpenInNewTab = openInNewTab || (currentPaletteMode !== 'url' && !isNewTabDocument);
         await chrome.runtime.sendMessage({
           type: 'DIA_NAVIGATE',
@@ -3266,6 +3396,15 @@
     const isMeta = e.metaKey || e.ctrlKey;
     const key = e.key.toLowerCase();
 
+    const sidebarShortcut = (isMeta && !e.shiftKey && !e.altKey && key === 's') ||
+      (e.ctrlKey && !e.metaKey && e.shiftKey && !e.altKey && key === 's');
+    if (settings.diaShortcutsEnabled && sidebarShortcut && !e.isComposing && !isEditableElement(e.composedPath()[0])) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (!e.repeat) toggleSidebarPinned();
+      return;
+    }
+
     if (currentPaletteMode === 'switcher' && isOpen) {
       if (e.key === 'Escape') {
         e.preventDefault();
@@ -3296,10 +3435,10 @@
     }
 
     if (settings.commandBarEnabled) {
-      if (isMeta && !e.shiftKey && !e.altKey && (key === 'k' || key === 't')) {
+      if (isMeta && !e.shiftKey && !e.altKey && (key === 'k' || (key === 't' && settings.openNewTabInCommandBar !== false))) {
         e.preventDefault();
         e.stopPropagation();
-        togglePalette('command');
+        if (!e.repeat) togglePalette('command');
         return;
       }
       if (isMeta && e.shiftKey && !e.altKey && key === 'l') {
@@ -3330,13 +3469,6 @@
       e.preventDefault();
       e.stopPropagation();
       copyPageUrl('markdown');
-      return;
-    }
-
-    if (isMeta && !e.shiftKey && !e.altKey && key === 's' && !isEditableElement(e.target)) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleSidebarPinned();
       return;
     }
 
@@ -3392,6 +3524,7 @@
 
   function onStorageChanged(changes, area) {
     if (area !== 'sync' && area !== 'local') return;
+    if (area === 'sync' && changes.sidebarWidth) setSidebarWidth(changes.sidebarWidth.newValue);
     for (const [key, change] of Object.entries(changes)) {
       if (key === 'workspaceName' && change.newValue !== undefined) {
         setWorkspaceName(change.newValue);
@@ -3413,8 +3546,9 @@
     if (!message || !message.type) return false;
 
     if (message.type === 'DIA_TOGGLE_COMMAND_BAR') {
-      togglePalette(message.mode || 'command');
-      sendResponse({ ok: true });
+      const available = settings.enabled !== false && isFullscreenWindow && settings.commandBarEnabled;
+      if (available) togglePalette(message.mode || 'command');
+      sendResponse({ ok: available });
     } else if (message.type === 'DIA_COPY_CURRENT_URL') {
       copyPageUrl(message.format || 'url');
       sendResponse({ ok: true });
@@ -3446,8 +3580,11 @@
   }
 
   window.__workspaceCommandCleanup = () => {
+    cleanupSidebarResize();
     cleanupSettingsPanel();
     cleanupDownloadsView();
+    document.documentElement.style.removeProperty('--arcflow-sidebar-width');
+    document.documentElement.removeAttribute('data-arcflow-sidebar-resizing');
     window.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('keydown', onKeyDown, true);
     window.removeEventListener('keyup', onKeyUp, true);
@@ -3466,13 +3603,14 @@
     buildShadowDOM();
 
     const [stored, winState] = await Promise.all([
-      chrome.storage.sync.get({ ...settings, workspaceName: 'Workspace' }).catch(() => ({})),
+      chrome.storage.sync.get({ ...settings, workspaceName: 'Workspace', sidebarWidth: 248 }).catch(() => ({})),
       chrome.runtime.sendMessage({ type: 'DIA_GET_WINDOW_STATE' }).catch(() => null)
     ]);
-    const { workspaceName = 'Workspace', ...storedSettings } = stored || {};
+    const { workspaceName = 'Workspace', sidebarWidth: savedSidebarWidth, ...storedSettings } = stored || {};
     settings = { ...settings, ...storedSettings };
     isSidebarPinned = settings.sidebarMode === 'pinned';
     setWorkspaceName(workspaceName);
+    setSidebarWidth(savedSidebarWidth);
 
     if (winState) {
       isFramelessWindow = Boolean(winState.isFrameless);

@@ -152,21 +152,6 @@
     return frameRoot;
   }
 
-  function detectFullscreenGeometry() {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      return false;
-    }
-    const screenW = window.screen.width;
-    const screenH = window.screen.height;
-    const outerW = window.outerWidth;
-    const outerH = window.outerHeight;
-    const innerH = window.innerHeight;
-
-    const widthMatchesScreen = Math.abs(outerW - screenW) <= 24;
-    const heightNearScreen = outerH >= screenH - 45 || innerH >= screenH - 85;
-    return widthMatchesScreen && heightNearScreen;
-  }
-
   function applyFrameVariables() {
     const html = document.documentElement;
     if (!html) return;
@@ -211,14 +196,14 @@
   }
 
   async function syncWindowState() {
-    isBrowserFullscreen = detectFullscreenGeometry();
+
     try {
       const response = await chrome.runtime.sendMessage({ type: 'DIA_GET_WINDOW_STATE' });
       if (response && typeof response.isFullscreen === 'boolean') {
         isBrowserFullscreen = response.isFullscreen;
       }
     } catch {
-      // Fallback to geometry check if service worker is waking up
+      // Keep the previous confirmed state if the worker is unavailable.
     }
     applyFrameVariables();
   }

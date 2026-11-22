@@ -18,13 +18,24 @@
         <div class="dia-welcome-content" id="welcomeIntro">
           <div class="dia-welcome-intro">
             <h1 class="dia-welcome-title">Welcome to Arcflow</h1>
-            <p class="dia-privacy-notice">Turn Google Chrome into a chill version of the Arc browser! Think vertical tabs, a floating command bar, and nested folders for easy tab organization. Plus, quick keyboard shortcuts for all the techie-nerds out there!</p>
+            <p id="activationDataUse" class="dia-privacy-notice">Arcflow uses tab titles, URLs and link destinations to help you navigate and organize tabs, and download and extension details to show those panels. Search providers receive queries, favicon hosts may receive icon requests, and Chrome may sync preferences. Arcflow’s developer receives none of this data. <a href="https://geekblooded.github.io/Arcflow/privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a></p>
           </div>
-          <label class="dia-privacy-consent"><input id="dataUseConsent" type="checkbox"><span>I understand and agree to this data use.</span></label>
+          <label class="dia-privacy-consent"><input id="dataUseConsent" type="checkbox" aria-describedby="activationDataUse"><span>I understand and agree to this data use.</span></label>
+          <p id="fullscreenActivationHint" class="dia-setup-error" role="status" hidden><strong>Tip:</strong> Exit full screen to activate Arcflow.</p>
           <button type="button" id="bigPowerBtn" class="dia-big-power-btn" aria-label="Agree to Arcflow data use and enable it" title="Agree and enable Arcflow" disabled>
             <span class="dia-activate-label">Activate Arcflow</span><span class="dia-activate-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </button>
           <span id="setupError" class="dia-setup-error" role="alert" hidden></span>
+        </div>
+        <div class="dia-welcome-content" id="activationSuccess" hidden>
+          <h1 class="dia-welcome-title" tabindex="-1">Say hello to new Chrome</h1>
+          <p class="dia-privacy-notice">Give your tabs room to breathe with a vertical sidebar, keep projects together in nested folders, and jump anywhere with <strong>⌘K</strong>. The Arc shortcuts you know are right here in Chrome.</p>
+          <button type="button" id="continueBrowsing">
+            <span>Continue browsing</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M7 7h10v10"/>
+            </svg>
+          </button>
         </div>
 
       </div>
@@ -39,7 +50,7 @@
           <div class="dia-brand-badge">
             <img src="../icons/icon-48.png" alt="Logo" width="22" height="22" style="object-fit: contain; display: block;" />
           </div>
-
+          <h1 class="dia-brand-name">Arcflow Settings</h1>
         </div>
 
         <nav class="dia-rail-nav" id="railNav">
@@ -689,9 +700,9 @@
           <div class="dia-group-label">Active Keyboard Shortcuts</div>
           <div class="dia-card-stack">
             <div class="dia-sc-row"><span>Open Command Bar</span><kbd>⌘K</kbd></div>
-            <div class="dia-sc-row"><span>New Chrome Tab</span><kbd>⌘T</kbd></div>
+            <div class="dia-sc-row"><span>Open Command Bar for New Tab</span><kbd>⌘T</kbd></div>
             <div class="dia-sc-row"><span>Edit Current URL in Bar</span><kbd>⌘⇧L</kbd></div>
-            <div class="dia-sc-row"><span>Pin / Unpin Vertical Sidebar</span><kbd>⌘S</kbd></div>
+            <div class="dia-sc-row"><span>Pin / Unpin Vertical Sidebar</span><kbd>⌘S / ⌃⇧S</kbd></div>
             <div class="dia-sc-row"><span>Close Highlighted Tab in Switcher</span><kbd>⌘W</kbd></div>
             <div class="dia-sc-row"><span>Copy Current URL + Toast</span><kbd>⌘⇧C</kbd></div>
             <div class="dia-sc-row"><span>Copy URL as Markdown</span><kbd>⌘⇧⌥C</kbd></div>

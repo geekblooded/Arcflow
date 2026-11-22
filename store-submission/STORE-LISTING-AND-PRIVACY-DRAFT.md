@@ -1,6 +1,6 @@
-# Chrome Web Store submission — Arcflow 1.0.0
+# Chrome Web Store update — Arcflow
 
-Status: Draft for a new Chrome Web Store item. This draft is written for the source package in `arcflow-1.0.0.zip`. Review every claim against the uploaded archive and the live Dashboard before certifying. As a new item, Arcflow starts at version 1.0.0.
+Status: Draft update to the existing Arcflow listing. The unpublished 1.0.1 submission candidate is `arcflow-1.0.1-rev2.zip`. The original 1.0.1 ZIP is retained as a backup.
 
 ## Store listing
 
@@ -78,13 +78,13 @@ The public policy is maintained in `docs/privacy.html`. Its effective date is No
 
 ## Assets and release file
 
-- Upload: `store-submission/arcflow-1.0.0.zip`
+- Upload: the approved update ZIP from this folder. Confirm its manifest version is higher than the published version.
 - Store icon: use `icons/icon-128.png` (128 × 128 PNG)
 - Screenshots: add current screenshots from the final extension build in the Dashboard; do not use the website's illustrative browser mockup as if it were a functional extension screenshot.
 
 ## Before submitting
 
-1. Confirm the ZIP is the exact Arcflow 1.0.0 package you intend to upload as a new item.
+1. Install the unpacked contents of the approved ZIP in a clean Chrome profile and test before uploading it to the existing Arcflow item.
 2. Set the listing name, description, support email, homepage URL, and privacy URL above.
 3. Complete each Dashboard data-use field and permission declaration to match the package and policy. Check “No” for remotely hosted executable code. The Dashboard's public disclosures are your certification.
 4. Upload real screenshots of the extension's current UI.

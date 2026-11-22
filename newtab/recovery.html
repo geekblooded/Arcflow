@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Tab</title>
+    <title>Page unavailable</title>
     <link rel="stylesheet" href="newtab.css" />
     <link rel="stylesheet" href="../styles/dia-frame.css" />
   </head>
   <body>
     <main class="new-tab">
-      <section id="recoveryMessage" class="recovery" hidden>
+      <section id="recoveryMessage" class="recovery">
         <h1>This page couldn’t be reached</h1>
         <p id="recoveryReason">Check the address or try again.</p>
       </section>
@@ -21,7 +21,6 @@
         <input id="ntAddressInput" type="text" autocomplete="off" spellcheck="false" placeholder="Search or enter a URL" aria-label="Search or enter a URL" />
         <kbd>↵</kbd>
       </form>
-      <p class="hint">A clean start. Press ⌘K to open the command bar.</p>
       <button id="recoveryRetry" class="recovery-retry" type="button" hidden>Retry</button>
     </main>
     <script src="../content/fullscreen-frame.js"></script>
